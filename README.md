@@ -9,4 +9,6 @@
       * Azure Image details
   * Azure Image recognition
   * Image Recognition (our own)
- 
+---
+# Design Concept
+![alt text](https://github.com/warnerm06/Final_Project_Img_Analysis/blob/master/Website_design_concept.JPG "Logo Title Text 1")
