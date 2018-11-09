@@ -25,6 +25,7 @@
   * Database Administration ()
   * Project Management (MW, )
     * Project timeline (Tom)
+  * AWS or Azure Storage () *Needed for image storage*
     
 ## Bonus
   * Database Search ()
