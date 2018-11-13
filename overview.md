@@ -43,7 +43,7 @@ https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-u
 Pros to this is that it will be our own dataset. We will spend time collecting data as well as time training our model. 
 
 ### Option 3: Build our own dataset and model without following a tutorial. 
-This would be the hardest option but doable. This opens up endless possibilities. 
+This would be the hardest option but doable. This opens up endless possibilities. Or find a new tutorial. 
 
 ## User Interface
 The website that faces the client. THis would include the HTML, CSS and Javascript to build the website. 
