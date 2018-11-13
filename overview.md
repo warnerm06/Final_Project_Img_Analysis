@@ -14,8 +14,8 @@ Machine learning will be the most challenging portion. We are analyzine images n
 
 Here is an example of a 2 x 3 pixel image represented by RGB matrix. 
 
-[[[234], [237]],
-[[245], [206]],
+[[[234], [237]],  
+[[245], [206]],  
 [[245], [296]]]
 
 ##Good news! 
@@ -51,6 +51,24 @@ The website that faces the client. THis would include the HTML, CSS and Javascri
 ## Database
 We will need to store our image labels in some form of database. It could by SQLite, SQL or MongoDB. We will also store image filepaths there. If we want the info to be permanent SQLite may not work. 
 
-## 
+## Azure API
+We will use Microsoft Azure Cognitive Services API to do image classification. We send a url and it will send back JSON data about the image. We will then display it on our website and store the data in our database. 
+
+I have a working Jupyter notebook of this in the Azure API folder. You will need add in the API keys I sent via slack. 
+
+## Flask App
+The flask app will be the backend of the program. It will be used as our webserver and serve HTML, JS and CSS. It will also do our database queries. 
+
+## Image Storage
+If we want to store the user images we will need permanent storage. We can use Heroku (a special heroku storage), AWS or Azure for this. Storing them in the local folder won't work because Heroku files get deleted when it shuts down.
+
+## Other Bonus Items
+Any bonus items should probably be worked on last if time remains. 
+
+
+
+
+
+
 
 
