@@ -18,7 +18,7 @@ Here is an example of a 2 x 3 pixel image represented by RGB matrix.
 [[245], [206]],  
 [[245], [296]]]
 
-##Good news! 
+## Good news! 
 I've found a couple of tutorials on how to do image analaysis. We can easily follow along and complete the ML portion. We can continue to search for tutorials but these are the two best I found. 
 
 ### Option 1: The easiest Option. 
