@@ -45,3 +45,12 @@ Pros to this is that it will be our own dataset. We will spend time collecting d
 ### Option 3: Build our own dataset and model without following a tutorial. 
 This would be the hardest option but doable. This opens up endless possibilities. 
 
+## User Interface
+The website that faces the client. THis would include the HTML, CSS and Javascript to build the website. 
+
+## Database
+We will need to store our image labels in some form of database. It could by SQLite, SQL or MongoDB. We will also store image filepaths there. If we want the info to be permanent SQLite may not work. 
+
+## 
+
+
