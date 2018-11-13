@@ -24,11 +24,12 @@ imageInfo=Base.classes.imageInfo
 @app.route("/")
 def index():
     
+    #queries the imageInfo table and returns all results
     results = session.query(imageInfo).all()
     
     print(type(results))
-    # print(results[0]["ID"])
     print(type(results[0]))
+    #print the first row of the query and only the URL column
     print(results[0].URL)
     # print(dir(results[0]))
 
