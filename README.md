@@ -1,4 +1,6 @@
-# Final_Project_Img_Analysis
+# Final_Project_Img_Analysis 
+    (Due December 15, 2018)
+
 ## Project MVP (Minimum Viable Product)
   * Flask App
   * Webpage
@@ -16,8 +18,8 @@
 # Responsibilities
 ## CORE (MVP)
   * User Experience
-    * HTML/CSS ()
-    * JavaScript ()
+    * HTML/CSS (DG)
+    * JavaScript (DG)
   * Flask App (MW, )
   * Machine Learning
     * Our Own Model (MW, )
@@ -28,7 +30,7 @@
   * AWS or Azure Storage () *Needed for image storage*
     
 ## Bonus
-  * Database Search ()
-  * User Login ()
+  * Database Search (DG)
+  * User Login (DG)
   * Real Domain Name () 
   * Image Gallery ()
