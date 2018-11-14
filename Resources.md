@@ -11,6 +11,9 @@ https://www.pyimagesearch.com/2017/12/04/how-to-create-a-deep-learning-dataset-u
 #### Tutorial Using CIFAR-10 Dataset
     Guide on how to use and train the CIFAR-10 Dataset. Dataset is 60,000 images classified into 10 categories.
 https://www.learnopencv.com/image-classification-using-convolutional-neural-networks-in-keras/
+* This Person has a huge Github Repo with Different ML techniques
+    Looks like a great ML resource. 
+https://github.com/spmallick/learnopencv
 
 #### CIFAR-10 Dataset Homepage
     CIFAR-10 Homepage for the 60,000 image dataset. 
