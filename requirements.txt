@@ -33,3 +33,4 @@ opencv_python == 3.4.3.18
 
 # image-classification-keras\image-classification-keras\train_network.py: 11
 scikit_learn == 0.20.0
+gunicorn==19.9.0
