@@ -1,8 +1,13 @@
 from flask import Flask, render_template, url_for
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec4276e42d626832a2821fe3373d6d1f98c8d86d
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 
+<<<<<<< HEAD
 #Image Analysis dependencies--------------------------------------------
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
@@ -13,6 +18,8 @@ import cv2
 from keras.backend import clear_session
 #-----------------------------------------------------------------------
 
+=======
+>>>>>>> ec4276e42d626832a2821fe3373d6d1f98c8d86d
 #Database Setup
 #must have "check_same_thread=False" or program will crash
 engine = create_engine("sqlite:///DB/image.db?check_same_thread=False")
@@ -36,14 +43,22 @@ def index():
     #queries the imageInfo table and returns all results
     results = session.query(imageInfo).all()
     
+<<<<<<< HEAD
     # print(type(results))
     # print(type(results[0]))
     #print the first row of the query and only the URL column
     # print(results[0].URL)
+=======
+    print(type(results))
+    print(type(results[0]))
+    #print the first row of the query and only the URL column
+    print(results[0].URL)
+>>>>>>> ec4276e42d626832a2821fe3373d6d1f98c8d86d
     # print(dir(results[0]))
 
     return render_template("index.html")
 
+<<<<<<< HEAD
 @app.route("/predict")
 def predict():
     #Use trained model to predict image
@@ -79,5 +94,7 @@ def predict():
 
     return render_template("index.html",label=label)
 
+=======
+>>>>>>> ec4276e42d626832a2821fe3373d6d1f98c8d86d
 if __name__ == "__main__":
     app.run(debug=True)
