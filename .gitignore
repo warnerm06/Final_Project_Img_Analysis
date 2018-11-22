@@ -1,30 +1,11 @@
 .ipynb_checkpoints
-<<<<<<< HEAD
-
 .tar
-
 .gz
-
 cifar-10-batches-py
-
 .tar.gz
 cifar-10-python.tar
-
 cifar-10-python.tar.gz
-
 image-classification-keras
-
 config.py
-
 __pycache__
-
 image-classification-keras.zip
-=======
-.tar
-.gz
-cifar-10-batches-py
-.tar.gz
-cifar-10-python.tar
-cifar-10-python.tar.gz
-image-classification-keras
->>>>>>> ec4276e42d626832a2821fe3373d6d1f98c8d86d
