@@ -29,6 +29,8 @@ numpy == 1.15.2
 # app.py: 12
 # image-classification-keras\image-classification-keras\test_network.py: 11
 # image-classification-keras\image-classification-keras\train_network.py: 20
+
+#must use this version. Newer version will not work on Heroku
 opencv_python == 3.3.0.9 #3.4.3.18
 
 # image-classification-keras\image-classification-keras\train_network.py: 11
