@@ -44,7 +44,7 @@ db = SQLAlchemy(app)
 def index():
     
     #queries the imageInfo table and returns all results
-    results = session.query(imageInfo).all()
+    # results = session.query(imageInfo).all()
     
     # print(type(results))
     # print(type(results[0]))
