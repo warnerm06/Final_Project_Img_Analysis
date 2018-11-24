@@ -1,7 +1,9 @@
 from flask import Flask, render_template, url_for
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
+import os
 
 #Image Analysis dependencies--------------------------------------------
 from keras.preprocessing.image import img_to_array
@@ -28,13 +30,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DATABASE_URL will contain the database connection string:
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
 # Connects to the database using the app config
 db = SQLAlchemy(app)
 
 
 
 #Create variable for Table in DB
-imageInfo=Base.classes.imageInfo
+image_info=Base.classes.image_info
 
 @app.route("/")
 def index():
