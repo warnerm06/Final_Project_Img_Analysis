@@ -32,20 +32,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DATABASE_URL will contain the database connection string:
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require') #from heroku
 
 # Connects to the database using the app config
 db = SQLAlchemy(app)
 
-try:
-    print(db.metadata)    
-
-except:
-    pass
-
-
 #Create variable for Table in DB
-# image_info=Base.classes.image_info
+image_info=Base.classes.image_info
 
 @app.route("/")
 def index():
