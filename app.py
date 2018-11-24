@@ -38,7 +38,7 @@ db = SQLAlchemy(app)
 
 
 #Create variable for Table in DB
-image_info=Base.classes.image_info
+# image_info=Base.classes.image_info
 
 @app.route("/")
 def index():
