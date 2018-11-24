@@ -51,7 +51,8 @@ except:
 def index():
     
     #queries the imageInfo table and returns all results
-    # results = session.query(imageInfo).all()
+    results = session.query(image_info).all()
+    results1=results[0].id
     
     # print(type(results))
     # print(type(results[0]))
@@ -59,7 +60,7 @@ def index():
     # print(results[0].URL)
     # print(dir(results[0]))
 
-    return render_template("index.html")
+    return render_template("index.html",results1=results1)
 
 @app.route("/predict")
 def predict():
