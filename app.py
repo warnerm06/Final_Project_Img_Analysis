@@ -7,7 +7,6 @@ from sqlalchemy.orm import Session
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 import numpy as np
-import argparse
 import imutils
 import cv2
 from keras.backend import clear_session
@@ -23,9 +22,16 @@ session = Session(engine)
 
 #Set up Flask
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///DB/image.db"
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///DB/image.db"
 #added this to quiet the warnings. 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# DATABASE_URL will contain the database connection string:
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+# Connects to the database using the app config
+db = SQLAlchemy(app)
+
+
 
 #Create variable for Table in DB
 imageInfo=Base.classes.imageInfo
