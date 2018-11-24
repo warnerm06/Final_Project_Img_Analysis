@@ -41,13 +41,6 @@ try:
 except:
     pass
 
-try:
-    print(db.)    
-
-except:
-    pass
-
-
 
 #Create variable for Table in DB
 # image_info=Base.classes.image_info
