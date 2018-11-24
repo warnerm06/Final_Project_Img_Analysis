@@ -16,7 +16,9 @@ from keras.backend import clear_session
 
 #Database Setup
 #must have "check_same_thread=False" or program will crash
-engine = create_engine("sqlite:///DB/image.db?check_same_thread=False")
+dbURL=os.environ.get('DATABASE_URL', '')
+
+engine = create_engine(dbURL)
 Base = automap_base()
 Base.prepare(engine, reflect = True)
 session = Session(engine)
@@ -29,7 +31,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DATABASE_URL will contain the database connection string:
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '')
+app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Connects to the database using the app config
