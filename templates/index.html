@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright - Modifications and Additions made by Dave Galloway -->
   <title>It's Santa!</title>
@@ -11,7 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <style>
-  body {
+    body {
       font: 20px Montserrat, sans-serif;
       line-height: 1.8;
       color: #f5f6f7;
@@ -52,48 +53,60 @@
   }
   </style>
 </head>
+
 <body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Santa's Bio</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Check Out our Pics!</a></li>
+          <li><a href="#">Link1</a></li>
+          <li><a href="#">Link2</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<!-- Navbar -->
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Santa's Bio</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Check Out our Pics!</a></li>
-        <li><a href="#">Link1</a></li>
-        <li><a href="#">Link2</a></li>
-      </ul>
-    </div>
+  <!-- First Container -->
+  <div class="container-fluid bg-1 text-center">
+    <h3 class="margin">Can you spot Santa during the off season?</h3>
+    <p>{{test}}</p>
+    <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Bird"
+      width="850" height="850">
+    <h3>What does your Santa look like?</h3>
   </div>
-</nav>
 
-<!-- First Container -->
-<div class="container-fluid bg-1 text-center">
-  <h3 class="margin">Can you spot Santa during the off season?</h3>
-  <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Bird" width="850" height="850">
-  <h3>What does your Santa look like?</h3>
-</div>
+  <!-- Second Container -->
+  <div class="container-fluid bg-2 text-center">
+    <h3 class="margin">Upload your pic...</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. </p>
 
-<!-- Second Container -->
-<div class="container-fluid bg-2 text-center">
-  <h3 class="margin">Upload your pic...</h3>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-  <form action="/action_page.php">
-    <div class="form-group">
-      <input type="file" class="form-control" id="file">
-    </div>
-    <button type="file" class="btn btn-default">Add your Pic here!</button>
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
-  <!--<form>
+      <h1>Upload new File</h1>
+      <form method=post enctype=multipart/form-data>
+        <p><input type=file name=file>
+           <input type=submit value=Upload>
+      </form>
+  
+
+    <!-- <form action="/test">
+      <div class="form-group">
+        <input type="file" class="form-control" id="file">
+      </div>
+      <button type="file" class="btn btn-default">Add your Pic here!</button>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form> -->
+    <!--<form>
     <div class="input-group">
       <input type="file" class="form-control" placeholder="Add your pic here!">
       <div class="input-group-btn">
@@ -103,38 +116,46 @@
       </div>
     </div>
   </form>-->
-</div>
+  </div>
 
-<!--Third Container: Option Carousel if time allows-->
+  <!--Third Container: Option Carousel if time allows-->
 
 
-<!-- Fourth Container (Grid) -->
-<div class="container-fluid bg-3 text-center">    
-  <h3 class="margin">Where To Find Me?</h3><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <p>Fun Fact: Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
-      <img src="/static/JustAFormality.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-4"> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-    </div>
-    <div class="col-sm-4"> 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+  <!-- Fourth Container (Grid) -->
+  <div class="container-fluid bg-3 text-center">
+    <h3 class="margin">Where To Find Me?</h3><br>
+    <div class="row">
+      <div class="col-sm-4">
+        <p>Fun Fact: Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
+        <img src="/static/JustAFormality.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua.</p>
+        <img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua.</p>
+        <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+      </div>
     </div>
   </div>
-</div>
 
 
 
 
-<!-- Footer -->
-<footer class="container-fluid bg-4 text-center">
-  <p>Check us out on linkedin:<a href="https://www.linkedin.com/in/matthew-warner-14b378163/"> Matt</a><a href="https://www.linkedin.com/in/davegalloway777/"> Dave</a><a href=""> Tom<a href=""></a> Michael<a href="https://www.linkedin.com/in/emma-li-b6668591/"></a> Emma</a></p> 
-</footer>
+  <!-- Footer -->
+  <footer class="container-fluid bg-4 text-center">
+    <p>Check us out on linkedin:
+      <a href="https://www.linkedin.com/in/matthew-warner-14b378163/"> Matt</a>
+      <a href="https://www.linkedin.com/in/davegalloway777/"> Dave</a>
+      <a href=""> Tom </a>
+      <a href="">Michael</a>
+      <a href="https://www.linkedin.com/in/emma-li-b6668591/"> Emma</a>
+    </p>
+  </footer>
 
 </body>
-</html>
 
+</html>

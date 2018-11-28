@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
@@ -16,7 +16,8 @@ from keras.backend import clear_session
 
 #Database Setup
 #must have "check_same_thread=False" or program will crash
-dbURL=os.environ.get('DATABASE_URL', '')
+# dbURL=os.environ.get('DATABASE_URL', '')
+dbURL="postgres://oipdniwugjmahr:8da79ffe46a77f52d4b2bb4aecf0f63b948e5da73e4ddf9766ca5b07f1052d76@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5l81lr3nin6oj"
 
 engine = create_engine(dbURL)
 Base = automap_base()
@@ -35,13 +36,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require') #from heroku
 
+app.config['UPLOAD_FOLDER'] = 'uploads'
+
 # Connects to the database using the app config
 db = SQLAlchemy(app)
 
 #Create variable for Table in DB
 image_info=Base.classes.image_info
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
     
     #queries the imageInfo table and returns all results
@@ -53,6 +56,18 @@ def index():
     #print the first row of the query and only the URL column
     # print(results[0].URL)
     # print(dir(results[0]))
+    data = {"success": False}
+    if request.method == 'POST':
+        if request.files.get('file'):
+            # read the file
+            file = request.files['file']
+
+            # read the filename
+            filename = file.filename
+
+            # create a path to the uploads folder
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath) 
 
     return render_template("index.html",results1=results1)
 
@@ -89,7 +104,14 @@ def predict():
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
 
-    return render_template("index.html",label=label)
+@app.route("/test")
+def test():
+    test="Hello From Test"
+    return render_template("index.html",test=test)
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
