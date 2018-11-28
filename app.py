@@ -27,6 +27,7 @@ session = Session(engine)
 #Set up Flask
 app = Flask(__name__)
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///DB/image.db"
+
 #added this to quiet the warnings. 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
