@@ -80,7 +80,7 @@
   <div class="container-fluid bg-1 text-center">
     <h3 class="margin">Can you spot Santa during the off season?</h3>
     <p>{{test}}</p>
-    <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Bird"
+    <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
       width="850" height="850">
     <h3>What does your Santa look like?</h3>
   </div>
@@ -92,11 +92,17 @@
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
       consequat. </p>
 
-      <h1>Upload new File</h1>
+      <h1>"Is it Santa?"</h1>
       <form method=post enctype=multipart/form-data>
         <p><input type=file name=file>
            <input type=submit value=Upload>
       </form>
+      <form action="/action_page.php">
+        Upload your image:<br>
+        <input type="text" name="Upload your image" value="Am I Santa?">
+        <br>
+        <input type="submit" value="Submit">
+        </form> 
   
 
     <!-- <form action="/test">
