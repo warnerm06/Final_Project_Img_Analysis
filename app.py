@@ -1,3 +1,4 @@
+#flask app imports
 from flask import Flask, render_template, url_for, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -15,7 +16,7 @@ from keras.backend import clear_session
 #Azure API Dependencies-------------------------------------------------
 import time
 import requests
-import operator
+# import operator
 # from __future__ import print_function
 from config import api_key
 
@@ -51,6 +52,8 @@ db = SQLAlchemy(app)
 #Create variable for Table in DB
 image_info=Base.classes.image_info
 
+#function to get AzureAPI info from url
+# Found from Microsoft github
 def azureAPI(urlAddress):
     print("here1")
     _region = 'westus' #Here you enter the region of your subscription
@@ -59,7 +62,6 @@ def azureAPI(urlAddress):
     _maxNumRetries = 10
 
     def processRequest( json, data, headers, params ):
-        print("Step1")
         retries = 0
         result = None
 
@@ -95,7 +97,7 @@ def azureAPI(urlAddress):
             break
             
         return result
-    print("Step2")
+
     params = { 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
 
     headers = dict()
@@ -106,8 +108,6 @@ def azureAPI(urlAddress):
     data = None
 
     result = processRequest( json, data, headers, params )
-    print('Hello from Result', result)
-
     return result
 
 @app.route("/", methods=['GET', 'POST'])
@@ -142,8 +142,8 @@ def index():
         else:
             urlAddress = request.values.get("urlAddress")
             azureResults = azureAPI(urlAddress)
-
-    return render_template("index.html",test=azureResults)
+    #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
+    return render_template("index.html",azureResults=azureResults)
 
 @app.route("/predict")
 def predict():
@@ -178,11 +178,12 @@ def predict():
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
     
-
+# just a route for testing
 @app.route("/test/<urlAddress>")
 def urlAddress():
     m=urlAddress
     return render_template("index.html",test=m)
 
+#used to run the app
 if __name__ == "__main__":
     app.run(debug=True)

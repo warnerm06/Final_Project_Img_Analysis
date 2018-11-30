@@ -79,6 +79,9 @@
       </div>
     </div>
   </nav>
+  <!-- table placeholder for use when building the table of azureApi results-->
+  <tbody id='tbody'></tbody>
+  <pre><code class ="prettyprint">{{azureResults}}</code></pre>
 
   <!-- First Container -->
   <div class="container-fluid bg-1 text-center">
@@ -97,7 +100,7 @@
       consequat. </p>
 
     <h1>"Is it Santa?"</h1>
-    <form method=post enctype=multipart/form-data> <input type="text" name="urlAddress" value="">
+    <form method=post enctype=multipart/form-data id ="buttonID"> <input type="text" name="urlAddress" value="">
       <input type=file name=file>
       <input type=submit value=Upload>
     </form>
@@ -149,12 +152,12 @@
       <div class="col-sm-4">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua.</p>
-        <img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua.</p>
-        <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
     </div>
   </div>
@@ -174,5 +177,11 @@
   </footer>
 
 </body>
-
+<script type="text/javascript">
+  // flask give us this variable. This is used in the js file
+  var azureResults = {{ azureResults | tojson}};
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script>
+<script src="../static/js/javascript.js"></script>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </html>
