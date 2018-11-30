@@ -12,7 +12,14 @@ import numpy as np
 import imutils
 import cv2
 from keras.backend import clear_session
-#-----------------------------------------------------------------------
+#Azure API Dependencies-------------------------------------------------
+import time
+import requests
+import operator
+# from __future__ import print_function
+from config import api_key
+
+
 
 #Database Setup
 #must have "check_same_thread=False" or program will crash
@@ -44,6 +51,65 @@ db = SQLAlchemy(app)
 #Create variable for Table in DB
 image_info=Base.classes.image_info
 
+def azureAPI(urlAddress):
+    print("here1")
+    _region = 'westus' #Here you enter the region of your subscription
+    _url = 'https://{}.api.cognitive.microsoft.com/vision/v2.0/analyze'.format(_region)
+    _key = api_key
+    _maxNumRetries = 10
+
+    def processRequest( json, data, headers, params ):
+        print("Step1")
+        retries = 0
+        result = None
+
+        while True:
+
+            response = requests.request( 'post', _url, json = json, data = data, headers = headers, params = params )
+
+            if response.status_code == 429: 
+
+                print( "Message: %s" % ( response.json() ) )
+
+                if retries <= _maxNumRetries: 
+                    time.sleep(1) 
+                    retries += 1
+                    continue
+                else: 
+                    print( 'Error: failed after retrying!' )
+                    break
+
+            elif response.status_code == 200 or response.status_code == 201:
+
+                if 'content-length' in response.headers and int(response.headers['content-length']) == 0: 
+                    result = None 
+                elif 'content-type' in response.headers and isinstance(response.headers['content-type'], str): 
+                    if 'application/json' in response.headers['content-type'].lower(): 
+                        result = response.json() if response.content else None 
+                    elif 'image' in response.headers['content-type'].lower(): 
+                        result = response.content
+            else:
+                print( "Error code: %d" % ( response.status_code ) )
+                print( "Message: %s" % ( response.json() ) )
+
+            break
+            
+        return result
+    print("Step2")
+    params = { 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
+
+    headers = dict()
+    headers['Ocp-Apim-Subscription-Key'] = _key
+    headers['Content-Type'] = 'application/json' 
+
+    json = { 'url': urlAddress } 
+    data = None
+
+    result = processRequest( json, data, headers, params )
+    print('Hello from Result', result)
+
+    return result
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
     
@@ -56,8 +122,11 @@ def index():
     #print the first row of the query and only the URL column
     # print(results[0].URL)
     # print(dir(results[0]))
-    data = {"success": False}
+    
+    #Once Upload/Submit button is clicked the user sends a "Post" request
+    azureResults= None
     if request.method == 'POST':
+        # If they are send a file do this:
         if request.files.get('file'):
             # read the file
             file = request.files['file']
@@ -69,7 +138,12 @@ def index():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath) 
 
-    return render_template("index.html",results1=results1)
+        # If they user is sending a URL do this:
+        else:
+            urlAddress = request.values.get("urlAddress")
+            azureResults = azureAPI(urlAddress)
+
+    return render_template("index.html",test=azureResults)
 
 @app.route("/predict")
 def predict():
@@ -103,15 +177,12 @@ def predict():
 
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
+    
 
-@app.route("/test")
-def test():
-    test="Hello From Test"
-    return render_template("index.html",test=test)
-
-
-
-
+@app.route("/test/<urlAddress>")
+def urlAddress():
+    m=urlAddress
+    return render_template("index.html",test=m)
 
 if __name__ == "__main__":
     app.run(debug=True)
