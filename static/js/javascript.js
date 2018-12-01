@@ -1,18 +1,18 @@
 // create variable from HTML {{azureResults}} variable
 var tableData = azureResults
-console.log("Step1");
+// console.log("Step1");
 
 //Function to build a table from our API data//
 function azureTable(data) {
-    console.log("Step2")
+    // console.log("Step2")
 
-    console.log(data)
-    console.log(typeof(data))
-    var tbody = d3.select("tbody");
+    // console.log(data)
+    // console.log(typeof(data))
+    // var tbody = d3.select("tbody");
 
-    Object.entries(data).forEach(
-        ([key, value]) => console.log(key, value)
-        );
+    // Object.entries(data).forEach(
+    //     ([key, value]) => console.log(key, value)
+    //     );
         
 //     // //Breaks here.... with a data.foreach is not a function......
 //     // data.forEach((data) => {
@@ -32,7 +32,9 @@ document.getElementById("buttonID").onclick = output(syntaxHighlight(str));
 
 function output(inp) {
     console.log("onclick",str)
-    document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+    // document.body.appendChild(document.createElement('pre')).innerHTML = inp;
+    document.getElementById("azurePtag").innerHTML = inp;
+
 }
 
 function syntaxHighlight(json) {

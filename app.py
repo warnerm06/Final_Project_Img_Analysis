@@ -19,6 +19,7 @@ import requests
 # import operator
 # from __future__ import print_function
 from config import api_key
+import urllib
 
 
 
@@ -44,7 +45,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require') #from heroku
 
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 # Connects to the database using the app config
 db = SQLAlchemy(app)
@@ -64,15 +65,10 @@ def azureAPI(urlAddress):
     def processRequest( json, data, headers, params ):
         retries = 0
         result = None
-
         while True:
-
             response = requests.request( 'post', _url, json = json, data = data, headers = headers, params = params )
-
             if response.status_code == 429: 
-
                 print( "Message: %s" % ( response.json() ) )
-
                 if retries <= _maxNumRetries: 
                     time.sleep(1) 
                     retries += 1
@@ -80,9 +76,7 @@ def azureAPI(urlAddress):
                 else: 
                     print( 'Error: failed after retrying!' )
                     break
-
             elif response.status_code == 200 or response.status_code == 201:
-
                 if 'content-length' in response.headers and int(response.headers['content-length']) == 0: 
                     result = None 
                 elif 'content-type' in response.headers and isinstance(response.headers['content-type'], str): 
@@ -93,21 +87,67 @@ def azureAPI(urlAddress):
             else:
                 print( "Error code: %d" % ( response.status_code ) )
                 print( "Message: %s" % ( response.json() ) )
-
             break
-            
         return result
-
-    params = { 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
-
+    params = { 'visualFeatures' : 'Categories,Description,Adult',
+                'details': 'Celebrities'} #{ 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
     headers = dict()
     headers['Ocp-Apim-Subscription-Key'] = _key
     headers['Content-Type'] = 'application/json' 
-
     json = { 'url': urlAddress } 
     data = None
-
     result = processRequest( json, data, headers, params )
+    return result
+
+def azureAPIlocal(fp):
+    print("here1")
+    _region = 'westus' #Here you enter the region of your subscription
+    _url = 'https://{}.api.cognitive.microsoft.com/vision/v2.0/analyze'.format(_region)
+    _key = api_key
+    _maxNumRetries = 10
+
+    def processRequest( json, data, headers, params ):
+        retries = 0
+        result = None
+        while True:
+            response = requests.request( 'post', _url, json = json, data = data, headers = headers, params = params )
+            if response.status_code == 429: 
+                print( "Message: %s" % ( response.json() ) )
+                if retries <= _maxNumRetries: 
+                    time.sleep(1) 
+                    retries += 1
+                    continue
+                else: 
+                    print( 'Error: failed after retrying!' )
+                    break
+            elif response.status_code == 200 or response.status_code == 201:
+                if 'content-length' in response.headers and int(response.headers['content-length']) == 0: 
+                    result = None 
+                elif 'content-type' in response.headers and isinstance(response.headers['content-type'], str): 
+                    if 'application/json' in response.headers['content-type'].lower(): 
+                        result = response.json() if response.content else None 
+                    elif 'image' in response.headers['content-type'].lower(): 
+                        result = response.content
+            else:
+                print( "Error code: %d" % ( response.status_code ) )
+                print( "Message: %s" % ( response.json() ) )
+            break
+        print(result)
+        return result
+
+    # Load raw image file into memory
+    pathToFileInDisk = fp
+    with open( pathToFileInDisk, 'rb' ) as f:
+        data = f.read()
+        
+    # Computer Vision parameters
+    params = { 'visualFeatures' : 'Categories'} 
+    headers = dict()
+    headers['Ocp-Apim-Subscription-Key'] = _key
+    headers['Content-Type'] = 'application/octet-stream'
+    json = None
+    result = processRequest( json, data, headers, params )
+
     return result
 
 @app.route("/", methods=['GET', 'POST'])
@@ -116,7 +156,6 @@ def index():
     #queries the imageInfo table and returns all results
     # results = session.query(image_info).all()
     # results1=results[0].id
-    
     # print(type(results))
     # print(type(results[0]))
     #print the first row of the query and only the URL column
@@ -126,7 +165,7 @@ def index():
     #Once Upload/Submit button is clicked the user sends a "Post" request
     azureResults= None
     sv = None
-    imgPath= None
+    imgPath= "static/FashionSanta.jpg"
 
     if request.method == 'POST':
         # If they are send a file do this:
@@ -143,19 +182,34 @@ def index():
 
             # sv= predict(filepath)
             imgPath= filepath
+            sv= predict(imgPath, "local")
+            azureResults=azureAPIlocal(imgPath)
+
+
         # If they user is sending a URL do this:
         else:
             urlAddress = request.values.get("urlAddress")
             print(urlAddress)
             azureResults = azureAPI(urlAddress)
             imgPath=urlAddress
+            sv=predict(imgPath, "url")
+            
             
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
     return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath)
 
 # @app.route("/predict")
-def predict(fp):
+def predict(fp, source):
     #Use trained model to predict image
+    if source == "url":
+        urllib.request.urlretrieve(fp, "static/uploads/file.jpg")
+        fp= "static/uploads/file.jpg"
+        # url = fp
+        # url_response=urllib.request.urlopen(fp)
+        # img_array = np.array(bytearray(url_response.read()), dtype=np.uint8)
+        # img = cv2.imdecode(img_array, -1)
+        # fp= img
+
 
     #Load the image
     image = cv2.imread(fp)

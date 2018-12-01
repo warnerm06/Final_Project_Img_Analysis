@@ -64,11 +64,11 @@
 	top: 0%;
 }
 pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
-.string { color: green; }
-.number { color: darkorange; }
+.string { color: white; }
+.number { color: yellow; }
 .boolean { color: blue; }
-.null { color: magenta; }
-.key { color: red; }
+.null { color: rgb(92, 43, 8); }
+.key { color: white; }
 
   </style>
 </head>
@@ -97,7 +97,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   </nav>
   <!-- table placeholder for use when building the table of azureApi results-->
   <tbody id='tbody'></tbody>
-  <font color= "black"> Label {{prediction}}</font>
+  
 
   
   <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
@@ -109,14 +109,16 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     <div class="row">
       <div class="col-sm-4">
         <p><h3>Our Analysis</h3></p>
+        <font color= "black"> Label: {{prediction}}</font>
           <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
-        <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
+        <img src="{{predImg}}" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
       width="850" height="850">
       </div>
         <div class="col-sm-4">
           <p><h3>Azure Analysis</h3></p>
+          <p id ="azurePtag"></p>
             <img src="" class="img-responsive margin" style="width:100%" alt="Image">
           </div>
         </div>
@@ -126,20 +128,11 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Upload your pic...</h3>
     <form method=post enctype=multipart/form-data id ="buttonID"> 
-      <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
+      <input type="text" name="urlAddress" value="">
     <input id="FileUpload" type=file name=file>
     <input type=submit value=Upload>
   </form>
       
-<<<<<<< HEAD
-      <h1>"Is it Santa?"</h1>
-      <form method=post enctype=multipart/form-data id ="buttonID"> 
-        <input type="text" name="urlAddress" value="URL HERE">
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-=======
->>>>>>> 8b6546e10bf5409ba66c3c4e914c6d8a62fe9c17
     
     <!-- <form method=post enctype=multipart/form-data>
         Upload your image:<br>
