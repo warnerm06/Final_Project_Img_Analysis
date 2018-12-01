@@ -114,8 +114,8 @@ def azureAPI(urlAddress):
 def index():
     
     #queries the imageInfo table and returns all results
-    results = session.query(image_info).all()
-    results1=results[0].id
+    # results = session.query(image_info).all()
+    # results1=results[0].id
     
     # print(type(results))
     # print(type(results[0]))
@@ -125,6 +125,9 @@ def index():
     
     #Once Upload/Submit button is clicked the user sends a "Post" request
     azureResults= None
+    sv = None
+    imgPath= None
+
     if request.method == 'POST':
         # If they are send a file do this:
         if request.files.get('file'):
@@ -136,22 +139,27 @@ def index():
 
             # create a path to the uploads folder
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath) 
+            file.save(filepath)
 
+            # sv= predict(filepath)
+            imgPath= filepath
         # If they user is sending a URL do this:
         else:
             urlAddress = request.values.get("urlAddress")
             print(urlAddress)
             azureResults = azureAPI(urlAddress)
+            imgPath=urlAddress
+            
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
-    return render_template("index.html",azureResults=azureResults)
+    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath)
 
-@app.route("/predict")
-def predict():
+# @app.route("/predict")
+def predict(fp):
     #Use trained model to predict image
 
     #Load the image
-    image = cv2.imread("image-classification-keras/image-classification-keras/examples/santa_02.jpg")
+    image = cv2.imread(fp)
+    # image = cv2.imread("image-classification-keras/image-classification-keras/examples/santa_02.jpg")
     orig = image.copy()
 
     #pre-process the image for classification
@@ -179,6 +187,7 @@ def predict():
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
     
+    return label
 # just a route for testing
 @app.route("/test/<urlAddress>")
 def urlAddress():

@@ -25,9 +25,9 @@ function azureTable(data) {
 };
 
 //When our submit button is clicked call the build table function//
+var str = JSON.stringify(tableData, undefined, 4);
 
-var str = JSON.stringify(tableData);
-document.getElementById("buttonID").onclick = output(str);
+document.getElementById("buttonID").onclick = output(syntaxHighlight(str));
 //network time? //
 
 function output(inp) {

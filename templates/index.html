@@ -89,6 +89,8 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   </nav>
   <!-- table placeholder for use when building the table of azureApi results-->
   <tbody id='tbody'></tbody>
+  <font color= "black"> Label {{prediction}}</font>
+
   
   <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
 
@@ -111,7 +113,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
       
       <h1>"Is it Santa?"</h1>
       <form method=post enctype=multipart/form-data id ="buttonID"> 
-        <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
+        <input type="text" name="urlAddress" value="URL HERE">
       <input type=file name=file>
       <input type=submit value=Upload>
     </form>
@@ -162,13 +164,16 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     </div>
     <div class="col-sm-4">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-        dolore magna aliqua.</p>
-        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+        dolore magna aliqua. </p>
+        <p>imgPath {{imgPath}}</p>
+        <!-- start here!!!!!! Image path variable -->
+        <img src="https://cdn.shopify.com/s/files/1/0464/4429/products/canoe-kit-building-materials-kayak-small-boat-kits-bear-mountain-boats-shop-us_210_grande.jpg?v=1538160017" class="img-responsive margin" style="width:100%" alt="Image">
+        
       </div>
       <div class="col-sm-4">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua.</p>
-          <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+          <img src="{{predImg}}" class="img-responsive margin" style="width:100%" alt="Image">
         </div>
       </div>
     </div>
