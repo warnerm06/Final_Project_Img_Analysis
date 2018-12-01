@@ -57,6 +57,12 @@
     color: #f31a37;
 }
 
+#FileUpload {
+  
+	position: relative;
+	left: 39%;
+	top: 0%;
+}
 pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .string { color: green; }
 .number { color: darkorange; }
@@ -100,7 +106,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     <h3 class="margin">Can you spot Santa during the off season?</h3>
     <div class="row">
       <div class="col-sm-4">
-        <p>Our Analysis</p>
+        <p><h3>Our Analysis</h3></p>
           <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
@@ -119,7 +125,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     <h3 class="margin">Upload your pic...</h3>
     <form method=post enctype=multipart/form-data id ="buttonID"> 
       <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
-    <input type=file name=file>
+    <input id="FileUpload" type=file name=file>
     <input type=submit value=Upload>
   </form>
       
