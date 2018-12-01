@@ -141,6 +141,7 @@ def index():
         # If they user is sending a URL do this:
         else:
             urlAddress = request.values.get("urlAddress")
+            print(urlAddress)
             azureResults = azureAPI(urlAddress)
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
     return render_template("index.html",azureResults=azureResults)

@@ -55,6 +55,14 @@
   input, select, textarea{
     color: #ff0000;
 }
+
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+
   </style>
 </head>
 
@@ -81,7 +89,9 @@
   </nav>
   <!-- table placeholder for use when building the table of azureApi results-->
   <tbody id='tbody'></tbody>
-  <pre><code class ="prettyprint">{{azureResults}}</code></pre>
+  
+  <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
+
 
   <!-- First Container -->
   <div class="container-fluid bg-1 text-center">
@@ -89,22 +99,23 @@
     <p>{{test}}</p>
     <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
       width="850" height="850">
-    <h3>What does your Santa look like?</h3>
-  </div>
+      <h3>What does your Santa look like?</h3>
+    </div>
 
-  <!-- Second Container -->
+    <!-- Second Container -->
   <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Upload your pic...</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
       consequat. </p>
-
-    <h1>"Is it Santa?"</h1>
-    <form method=post enctype=multipart/form-data id ="buttonID"> <input type="text" name="urlAddress" value="">
+      
+      <h1>"Is it Santa?"</h1>
+      <form method=post enctype=multipart/form-data id ="buttonID"> 
+        <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
       <input type=file name=file>
       <input type=submit value=Upload>
     </form>
-
+    
     <!-- <form method=post enctype=multipart/form-data>
         Upload your image:<br>
         <input type="text" name="userURL" value="Am I Santa?">
@@ -112,12 +123,12 @@
         <input type="submit" value=Upload>
         </form>  -->
 
-    <!-- <form action="/test">
+        <!-- <form action="/test">
         Upload your image:<br>
         <br>
         <input type="submit" value="Submit">
-        </form>  -->
-
+      </form>  -->
+      
 
     <!-- <form action="/test">
       <div class="form-group">
@@ -127,44 +138,45 @@
       <button type="submit" class="btn btn-default">Submit</button>
     </form> -->
     <!--<form>
-    <div class="input-group">
-      <input type="file" class="form-control" placeholder="Add your pic here!">
-      <div class="input-group-btn">
-        <button class="btn btn-default" type="submit">
-          <i class="glyphicon glyphicon-upload"></i>
-        </button>
+      <div class="input-group">
+        <input type="file" class="form-control" placeholder="Add your pic here!">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-upload"></i>
+          </button>
       </div>
     </div>
   </form>-->
-  </div>
+</div>
 
-  <!--Third Container: Option Carousel if time allows-->
+<!--Third Container: Option Carousel if time allows-->
 
 
-  <!-- Fourth Container (Grid) -->
-  <div class="container-fluid bg-3 text-center">
-    <h3 class="margin">Where To Find Me?</h3><br>
-    <div class="row">
-      <div class="col-sm-4">
-        <p>Fun Fact: Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
-        <img src="/static/JustAFormality.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-      </div>
-      <div class="col-sm-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua.</p>
+<!-- Fourth Container (Grid) -->
+<div class="container-fluid bg-3 text-center">
+  <h3 class="margin">Where To Find Me?</h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      <p>Fun Fact: Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
+      <img src="/static/JustAFormality.jpg" class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+        dolore magna aliqua.</p>
         <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
           dolore magna aliqua.</p>
-        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+          <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+        </div>
       </div>
     </div>
-  </div>
 
+    
 
-
-
+    <!-- <pre class= "prettyprint"><code class ="language-js">{{azureResults}}</code></pre> -->
+    
   <!-- Footer -->
   <footer class="container-fluid bg-4 text-center">
     <p>Check us out on linkedin:
@@ -180,6 +192,8 @@
 <script type="text/javascript">
   // flask give us this variable. This is used in the js file
   var azureResults = {{ azureResults | tojson}};
+  // var azureResults = {{ azureResults }};
+  // console.log(azureResults)
   </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script>
 <script src="../static/js/javascript.js"></script>
