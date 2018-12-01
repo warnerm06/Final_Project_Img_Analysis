@@ -11,6 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- Some inline CSS for editing convenience -->
   <style>
     body {
       font: 20px Montserrat, sans-serif;
@@ -36,12 +37,12 @@
       color: #fff;
   }
   .container-fluid {
-      padding-top: 70px;
-      padding-bottom: 70px;
+      padding-top: 50px;
+      padding-bottom: 50px;
   }
   .navbar {
-      padding-top: 15px;
-      padding-bottom: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
       border: 0;
       border-radius: 0;
       margin-bottom: 0;
@@ -66,6 +67,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   </style>
 </head>
 
+<!-- Navbar organization and containers defining the divisions within the -->
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-default">
@@ -96,25 +98,35 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   <!-- First Container -->
   <div class="container-fluid bg-1 text-center">
     <h3 class="margin">Can you spot Santa during the off season?</h3>
-    <p>{{test}}</p>
-    <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
+    <div class="row">
+      <div class="col-sm-4">
+        <p>Our Analysis</p>
+          <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+      </div>
+      <div class="col-sm-4">
+        <img src="/static/FashionSanta.jpg" class="img-responsive img-rounded margin" style="display:inline" alt="Santa"
       width="850" height="850">
-      <h3>What does your Santa look like?</h3>
+      </div>
+        <div class="col-sm-4">
+          <p><h3>Azure Analysis</h3></p>
+            <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+          </div>
+        </div>
+
+    <p>{{test}}</p>
+    
+      
     </div>
 
     <!-- Second Container -->
   <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Upload your pic...</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. </p>
+    <form method=post enctype=multipart/form-data id ="buttonID"> 
+      <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
+    <input type=file name=file>
+    <input type=submit value=Upload>
+  </form>
       
-      <h1>"Is it Santa?"</h1>
-      <form method=post enctype=multipart/form-data id ="buttonID"> 
-        <input type="text" name="urlAddress" value="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Ash_Tree_-_geograph.org.uk_-_590710.jpg/220px-Ash_Tree_-_geograph.org.uk_-_590710.jpg">
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
     
     <!-- <form method=post enctype=multipart/form-data>
         Upload your image:<br>
