@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 import os
-
 #Image Analysis dependencies--------------------------------------------
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
@@ -20,8 +19,7 @@ import requests
 # from __future__ import print_function
 from config import api_key
 import urllib
-
-
+#-----------------------------------------------------------------------
 
 #Database Setup
 #must have "check_same_thread=False" or program will crash
@@ -153,6 +151,7 @@ def azureAPIlocal(fp):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    ## Not using
     #queries the imageInfo table and returns all results
     # results = session.query(image_info).all()
     # results1=results[0].id
@@ -200,24 +199,16 @@ def index():
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
     return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath)
 
-# @app.route("/predict")
-def predict(fp, source):
-    #Use trained model to predict image
+# Use our ML model to Predict Santa or Not Santa
+def predict(fp, source): #fp is "filepath" and source is either "url" or "local".
+    # URL images must be saved to a local file first
     if source == "url":
         urllib.request.urlretrieve(fp, "static/uploads/file.jpg")
         fp= "static/uploads/file.jpg"
-        # url = fp
-        # url_response=urllib.request.urlopen(fp)
-        # img_array = np.array(bytearray(url_response.read()), dtype=np.uint8)
-        # img = cv2.imdecode(img_array, -1)
-        # fp= img
-
-
+        
     #Load the image
     image = cv2.imread(fp)
-    # image = cv2.imread("image-classification-keras/image-classification-keras/examples/santa_02.jpg")
-    orig = image.copy()
-
+    
     #pre-process the image for classification
     #resize image to fit model shape
     image = cv2.resize(image, (28, 28))
@@ -234,21 +225,13 @@ def predict(fp, source):
     #build the label
     label = "Santa" if santa > notSanta else "Not Santa"
     proba = santa if santa > notSanta else notSanta
+    #format the label
     label = "{}: {:.2f}%".format(label, proba*100)
-
-    #draw the label on the image
-    # output = imutils.resize(orig, width=400)
-    # cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,0.7, (0, 255, 0), 2)
 
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
     
     return label
-# just a route for testing
-@app.route("/test/<urlAddress>")
-def urlAddress():
-    m=urlAddress
-    return render_template("index.html",test=m)
 
 #used to run the app
 if __name__ == "__main__":
