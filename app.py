@@ -153,17 +153,17 @@ def azureAPIlocal(fp):
 def index():
     ## Not using
     #queries the imageInfo table and returns all results
-    # results = session.query(image_info).all()
-    # results1=results[0].id
-    # print(type(results))
-    # print(type(results[0]))
-    #print the first row of the query and only the URL column
-    # print(results[0].URL)
-    # print(dir(results[0]))
+            # results = session.query(image_info).all()
+            # results1=results[0].id
+            # print(type(results))
+            # print(type(results[0]))
+            #print the first row of the query and only the URL column
+            # print(results[0].URL)
+            # print(dir(results[0]))
     
     #Once Upload/Submit button is clicked the user sends a "Post" request
 
-    #must set these to none to start with. 
+    # These variables must be set to none to start with in case the if statement is not executed
     azureResults= None
     sv = None
     imgPath= "static/FashionSanta.jpg"
