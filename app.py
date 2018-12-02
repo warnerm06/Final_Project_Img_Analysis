@@ -53,8 +53,8 @@ db = SQLAlchemy(app)
 #Create variable for Table in DB
 image_info=Base.classes.image_info
 
-#function to get AzureAPI info from url
-# Found from Microsoft github
+#function to get AzureAPI info from url. Thi is only for URL addresses. It doesnt work for local file lookups. 
+# Found from Microsoft github 
 def azureAPI(urlAddress):
     print("here1")
     _region = 'westus' #Here you enter the region of your subscription
@@ -99,6 +99,7 @@ def azureAPI(urlAddress):
     result = processRequest( json, data, headers, params )
     return result
 
+#Use this function for azureAPI calls form local file
 def azureAPIlocal(fp):
     print("here1")
     _region = 'westus' #Here you enter the region of your subscription
@@ -148,11 +149,10 @@ def azureAPIlocal(fp):
     json = None
     result = processRequest( json, data, headers, params )
 
-    return result
+    return result # returns json object
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    
     #queries the imageInfo table and returns all results
     # results = session.query(image_info).all()
     # results1=results[0].id
@@ -163,6 +163,8 @@ def index():
     # print(dir(results[0]))
     
     #Once Upload/Submit button is clicked the user sends a "Post" request
+
+    #must set these to none to start with. 
     azureResults= None
     sv = None
     imgPath= "static/FashionSanta.jpg"
@@ -235,8 +237,8 @@ def predict(fp, source):
     label = "{}: {:.2f}%".format(label, proba*100)
 
     #draw the label on the image
-    output = imutils.resize(orig, width=400)
-    cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,0.7, (0, 255, 0), 2)
+    # output = imutils.resize(orig, width=400)
+    # cv2.putText(output, label, (10, 25),  cv2.FONT_HERSHEY_SIMPLEX,0.7, (0, 255, 0), 2)
 
     #clear TF session or it will cause an issue upon refreshing page
     clear_session()
