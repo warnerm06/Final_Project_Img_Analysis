@@ -1,33 +1,23 @@
 // create variable from HTML {{azureResults}} variable
+
 var tableData = azureResults
-// console.log("Step1");
 
 //Function to build a table from our API data//
-function azureTable(data) {
-    // console.log("Step2")
-
-    // console.log(data)
-    // console.log(typeof(data))
-    // var tbody = d3.select("tbody");
-
-    // Object.entries(data).forEach(
-    //     ([key, value]) => console.log(key, value)
-    //     );
-        
-//     // //Breaks here.... with a data.foreach is not a function......
-//     // data.forEach((data) => {
-//     //     console.log("Step3");
-//     //     var row = tbody.append("tr");
-//     //     Object.entries(data).forEach(([key, value]) => {
-    //     //         var cell = tbody.append("td").text(value);
-    //     //     });
-    //     // });
-};
+// function azureTable(data) {
+// };
 
 //When our submit button is clicked call the build table function//
 var str = JSON.stringify(tableData, undefined, 4);
 
-document.getElementById("buttonID").onclick = output(syntaxHighlight(str));
+
+document.getElementById("buttonID").onclick =output(syntaxHighlight(str)); 
+
+// document.getElementById("buttonID").onclick =toTable();
+
+    
+ 
+
+// toTable();
 //network time? //
 
 function output(inp) {
@@ -56,10 +46,40 @@ function syntaxHighlight(json) {
     });
 }
 
-// setTimeout(() => {
-    //     var str = JSON.stringify(tableData, undefined, 4);
-    // }, 2000);
-// }, 2000);
+// test----------------------------------------------------------------------
+// var obj = [{
+//     "key": "apple",
+//     "value": 1.90
+// }, {
+//     "key": "berry",
+//     "value": 1.7
+// }, {
+//     "key": "banana",
+//     "value": 1.5
+// }, {
+//     "key": "cherry",
+//     "value": 1.2
+// }];
 
-// output(str);
+// var tbody = document.getElementById('tbody');
+// var tList= [tableData]
+// function toTable() {
+//     console.log("TableFunction")
+//     // console.log("azure",azureResults)
+//     console.log([tableData])
+//     console.log([tableData].length)
+//     for (var i = 0; i < tList.length; i++) {
+//         var tr = "<tr>";
 
+//         /* Verification to add the last decimal 0 */
+//         if (tList[i].value.toString().substring(tList[i].value.toString().indexOf('.'), tList[i].value.toString().length) < 2) 
+//             tList[i].value += "0";
+
+//         /* Must not forget the $ sign */
+//         tr += "<td>" + tList[i].key + "</td>" + "<td>$" + tList[i].value.toString() + "</td></tr>";
+
+//         /* We add the table row to the table body */
+//         tbody.innerHTML += tr;
+//         console.log("Here")
+//     };
+// }
