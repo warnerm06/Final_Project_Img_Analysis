@@ -110,19 +110,19 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   <div class="container-fluid bg-1 text-center">
     <h3 class="margin">Can you spot Santa during the off season?</h3>
     <div class="row">
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <p>
           <h3>Our Analysis</h3>
         </p>
         <p>{{prediction}}</p> <!-- our Sant or Not Santa Prediction. This is a variable returned by our homepage -->
         <img src="" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-6">
         <!-- our main image is dynamic. This will show the image selected by the user. -->
         <img src="{{predImg}}" class="img-responsive img-rounded margin" style="display:inline" alt="Santa" width="850"
           height="850">
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <p>
           <h3>Azure Analysis</h3>
         </p>
@@ -131,7 +131,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
       </div>
     </div>
   </div>
-
+  <input type="text" name="urlAddress" value="" style="width: 100%">
   <!-- Second Container -->
   <div class="container-fluid bg-2 text-center">
     <h3 class="margin">Upload your pic...</h3>
