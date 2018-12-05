@@ -21,6 +21,8 @@ from config import api_key
 import urllib
 #-----------------------------------------------------------------------
 
+
+globalAzureResults= None
 #Database Setup
 #must have "check_same_thread=False" or program will crash
 # dbURL=os.environ.get('DATABASE_URL', '')
@@ -196,6 +198,9 @@ def index():
             azureResults = azureAPI(urlAddress)
             imgPath=urlAddress
             sv=predict(imgPath, "url")
+
+            global globalAzureResults 
+            globalAzureResults= azureResults
             
             
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
@@ -234,6 +239,16 @@ def predict(fp, source): #fp is "filepath" and source is either "url" or "local"
     clear_session()
     
     return label
+
+@app.route("/moreInfo")
+def moreInfo():
+
+
+    return render_template("index2.html",info =globalAzureResults)
+
+
+
+
 
 #used to run the app
 if __name__ == "__main__":

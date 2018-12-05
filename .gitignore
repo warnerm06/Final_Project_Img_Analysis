@@ -11,3 +11,4 @@ __pycache__
 image-classification-keras.zip
 
 train_images
+uploads/*
