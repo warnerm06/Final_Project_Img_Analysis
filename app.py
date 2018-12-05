@@ -45,7 +45,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# app.config['AZURE_API_KEY'] =api_key
+# api_key =app.config['AZURE_API_KEY']
 
 # Connects to the database using the app config
 db = SQLAlchemy(app)
