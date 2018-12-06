@@ -26,10 +26,10 @@ import urllib
 developmentEnvironment = False
 if developmentEnvironment == True:
     from config import api_key
-    dbURL="postgres://oipdniwugjmahr:8da79ffe46a77f52d4b2bb4aecf0f63b948e5da73e4ddf9766ca5b07f1052d76@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5l81lr3nin6oj"
+    from config import dbURL
 else:
-    dbURL=os.environ.get('DATABASE_URL', '')
-    api_key =app.config['AZURE_API_KEY']
+    dbURL = os.environ.get('DATABASE_URL', '')
+    api_key = os.environ.get('AZURE_API_KEY', '')
 
 globalAzureResults= None
 #Database Setup
