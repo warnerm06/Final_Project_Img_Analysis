@@ -173,6 +173,7 @@ def index():
     imgPath= "static/FashionSanta.jpg"
 
     if request.method == 'POST':
+        global globalAzureResults
         # If they are send a file do this:
         if request.files.get('file'):
             # read the file
@@ -190,6 +191,7 @@ def index():
             sv= predict(imgPath, "local")
             azureResults=azureAPIlocal(imgPath)
 
+            globalAzureResults= azureResults
 
         # If they user is sending a URL do this:
         else:
@@ -199,7 +201,6 @@ def index():
             imgPath=urlAddress
             sv=predict(imgPath, "url")
 
-            global globalAzureResults 
             globalAzureResults= azureResults
             
             
