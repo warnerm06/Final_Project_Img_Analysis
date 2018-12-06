@@ -17,7 +17,7 @@ import time
 import requests
 # import operator
 # from __future__ import print_function
-from config import api_key
+# from config import api_key
 import urllib
 #-----------------------------------------------------------------------
 
