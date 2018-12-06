@@ -21,18 +21,24 @@ from config import api_key
 import urllib
 #-----------------------------------------------------------------------
 
+# Set to true if devloping on local machine. Turn to false when in production.
+# This sets envronment variables to connect to API and database
+developmentEnvironment = False
+if developmentEnvironment == True:
+    from config import api_key
+    dbURL="postgres://oipdniwugjmahr:8da79ffe46a77f52d4b2bb4aecf0f63b948e5da73e4ddf9766ca5b07f1052d76@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5l81lr3nin6oj"
+else:
+    dbURL=os.environ.get('DATABASE_URL', '')
+    api_key =app.config['AZURE_API_KEY']
 
 globalAzureResults= None
 #Database Setup
 #must have "check_same_thread=False" or program will crash
-# dbURL=os.environ.get('DATABASE_URL', '')
-dbURL="postgres://oipdniwugjmahr:8da79ffe46a77f52d4b2bb4aecf0f63b948e5da73e4ddf9766ca5b07f1052d76@ec2-54-83-8-246.compute-1.amazonaws.com:5432/d5l81lr3nin6oj"
 
 engine = create_engine(dbURL)
 Base = automap_base()
 Base.prepare(engine, reflect = True)
 session = Session(engine)
-
 
 #Set up Flask
 app = Flask(__name__)
@@ -47,7 +53,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
-# api_key =app.config['AZURE_API_KEY']
 
 # Connects to the database using the app config
 db = SQLAlchemy(app)
@@ -58,7 +63,6 @@ image_info=Base.classes.image_info
 #function to get AzureAPI info from url. Thi is only for URL addresses. It doesnt work for local file lookups. 
 # Found from Microsoft github 
 def azureAPI(urlAddress):
-    print("here1")
     _region = 'westus' #Here you enter the region of your subscription
     _url = 'https://{}.api.cognitive.microsoft.com/vision/v2.0/analyze'.format(_region)
     _key = api_key
@@ -91,8 +95,7 @@ def azureAPI(urlAddress):
                 print( "Message: %s" % ( response.json() ) )
             break
         return result
-    params = { 'visualFeatures' : 'Categories,Description,Adult',
-                'details': 'Celebrities'} #{ 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
+    params = { 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
     headers = dict()
     headers['Ocp-Apim-Subscription-Key'] = _key
     headers['Content-Type'] = 'application/json' 
@@ -144,7 +147,7 @@ def azureAPIlocal(fp):
         data = f.read()
         
     # Computer Vision parameters
-    params = { 'visualFeatures' : 'Categories'} 
+    params = { 'visualFeatures' : 'Color,Categories,Tags,Description,Faces,ImageType,Adult', 'details': 'Celebrities,Landmarks'}
     headers = dict()
     headers['Ocp-Apim-Subscription-Key'] = _key
     headers['Content-Type'] = 'application/octet-stream'
@@ -171,6 +174,7 @@ def index():
     azureResults= None
     sv = None
     imgPath= "static/FashionSanta.jpg"
+    text = None
 
     if request.method == 'POST':
         global globalAzureResults
@@ -192,6 +196,8 @@ def index():
             azureResults=azureAPIlocal(imgPath)
 
             globalAzureResults= azureResults
+            globalAzureResults= azureResults
+            text = azureResults["description"]["captions"][0]["text"]
 
         # If they user is sending a URL do this:
         else:
@@ -202,10 +208,10 @@ def index():
             sv=predict(imgPath, "url")
 
             globalAzureResults= azureResults
-            
+            text = azureResults["description"]["captions"][0]["text"]
             
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
-    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath)
+    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath, text=text)
 
 # Use our ML model to Predict Santa or Not Santa
 def predict(fp, source): #fp is "filepath" and source is either "url" or "local".
@@ -246,10 +252,6 @@ def moreInfo():
 
 
     return render_template("index2.html",info =globalAzureResults)
-
-
-
-
 
 #used to run the app
 if __name__ == "__main__":

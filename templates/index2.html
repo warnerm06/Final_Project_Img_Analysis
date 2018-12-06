@@ -1,6 +1,20 @@
 <html>
-    <body>
-        <pre class= "prettyprint"><code class ="language-js">{{info}}</code></pre>
-    </body>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<!-- <style>
+pre {outline: 1px solid black; padding: 5px; margin: 5px; }
+.string { color: black; }
+.number { color: yellow; }
+.boolean { color: blue; }
+.null { color: rgb(92, 43, 8); }
+.key { color: black; }
+</style> -->
+
+<body>
+    <!-- <p>{{info}}</p> -->
+    <!-- <pre class="prettyprint"><code class ="language-js">{{info}}</code></pre> -->
+    <pre><code id="azurePtag"></code></pre>
+</body>
+<script type="text/javascript">var info = {{ info | tojson}};</script>
+<!-- <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script> -->
+<script src="../static/js/jsinfo.js"></script>
+
 </html>
