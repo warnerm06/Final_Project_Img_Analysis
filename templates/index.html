@@ -24,9 +24,14 @@
       background-color: #f31a37; /* Christmas red */
       color: #ffffff;
   }
+  .container-fluid {
+      padding-top: 7px;
+      padding-bottom: 7px;
+  }
   .bg-2 { 
       background-color: #474e5d; /* Dark Blue */
       color: #ffffff;
+
   }
   .bg-3 { 
       background-color: #ffffff; /* White */
@@ -35,10 +40,6 @@
   .bg-4 { 
       background-color: #2f2f2f; /* Black Gray */
       color: #fff;
-  }
-  .container-fluid {
-      padding-top: 45px;
-      padding-bottom: 45px;
   }
   .navbar {
       padding-top: 10px;
@@ -52,6 +53,11 @@
   .navbar-nav  li a:hover {
       color: #f31a37 !important;
   }
+
+  /* .search {
+    padding:0%;
+    margin: 0%;
+  } */
 
   input, select, textarea{
     color: #f31a37;
@@ -89,29 +95,25 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Check Out our Pics!</a></li>
-          <li><a href="#">Link1</a></li>
+          <!-- <li><a href="#">Check Out our Pics!</a></li>
+          <li><a href="#">Link1</a></li> -->
           <li><a href="moreInfo" target="_blank">More Image Info </a></li>
         </ul>
       </div>
     </div>
   </nav>
-
-
-
   <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
-  
   
   <div class="container-fluid bg-2">
     <!-- <h3>Upload your pic...</h3> -->
     <form method=post enctype=multipart/form-data id="buttonID">
-      <div>
-        <input type="text" name="urlAddress" value="Upload Image or URL" size="50%">
+      <div class="col-sm-4 search">
+        <input type="text" name="urlAddress" value="Upload Image or URL">
       </div>
-      <div>
+      <div class="col-sm-5 search">
         <input id="FileUpload" type=file name=file>
       </div>
-      <div>
+      <div class="col-sm-3 search">
         <input type=submit value=Upload>
       </div>
     </form>
@@ -183,21 +185,19 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 
   <!-- Fourth Container (Grid) -->
   <div class="container-fluid bg-3 text-center">
-    <h3 class="margin">Where To Find Me?</h3><br>
+    <!-- <h3 class="margin">Where To Find Me?</h3><br> -->
     <div class="row">
       <div class="col-sm-4">
-        <p>Fun Fact: Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
+        <p><b>Fun Fact #1:</b> Santa Clause receives pilot's license from Assistant Secretary of Commerce. (1927)</p>
         <img src="/static/JustAFormality.jpg" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. </p>
-        <p>imgPath {{imgPath}}</p>
+        <p><b>Fun Fact #2:</b> A Charlie Brown Christmas origninally aired 1965 and is directly responsible for the death of the aluminum christmas tree. </p>
+          <img src="https://i.ibb.co/LS9P8tS/Banner.jpg" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
       <div class="col-sm-4">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua.</p>
-        <img src="{{predImg}}" class="img-responsive margin" style="width:100%" alt="Image">
+        <p><b>Fun Fact #3:</b> Have you ever wondered why the holidays are also referred to as the 12 days of Christmas? Legend has it that the three kings took twelve days to travel to the birthplace of baby Jesus.</p>
+        <img src="https://obscurecharacters.files.wordpress.com/2015/12/three-wise-men.jpg" class="img-responsive margin" style="width:100%" alt="Image">
       </div>
     </div>
   </div>
