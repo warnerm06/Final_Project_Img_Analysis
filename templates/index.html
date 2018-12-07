@@ -100,8 +100,22 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 
 
   <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
-
-
+  
+  
+  <div class="container-fluid bg-2">
+    <!-- <h3>Upload your pic...</h3> -->
+    <form method=post enctype=multipart/form-data id="buttonID">
+      <div>
+        <input type="text" name="urlAddress" value="Upload Image or URL" size="50%">
+      </div>
+      <div>
+        <input id="FileUpload" type=file name=file>
+      </div>
+      <div>
+        <input type=submit value=Upload>
+      </div>
+    </form>
+  </div>
   <!-- First Container -->
   <div class="container-fluid bg-1 text-center">
     <h3 class="margin">Can you spot Santa during the off season?</h3>
@@ -132,13 +146,6 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   </div>
   <input type="text" name="urlAddress" value="" style="width: 100%">
   <!-- Second Container -->
-  <div class="container-fluid bg-2 text-center">
-    <h3 class="margin">Upload your pic...</h3>
-    <form method=post enctype=multipart/form-data id="buttonID">
-      <input type="text" name="urlAddress" value="">
-      <input id="FileUpload" type=file name=file>
-      <input type=submit value=Upload>
-    </form>
 
     <!-- <form method=post enctype=multipart/form-data>
         Upload your image:<br>
@@ -170,7 +177,6 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
       </div>
     </div>
   </form>-->
-  </div>
 
   <!--Third Container: Option Carousel if time allows-->
 
