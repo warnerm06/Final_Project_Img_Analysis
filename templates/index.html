@@ -110,8 +110,8 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
         <p>
           <h3>Our Analysis</h3>
         </p>
-        <p>{{prediction}}</p> <!-- our Sant or Not Santa Prediction. This is a variable returned by our homepage -->
-        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+        <p><b>{{prediction}}</b></p> <!-- our Sant or Not Santa Prediction. This is a variable returned by our homepage -->
+        <!-- <img src="" class="img-responsive margin" style="width:100%" alt="Image"> -->
       </div>
       <div class="col-sm-6">
         <!-- our main image is dynamic. This will show the image selected by the user. -->
@@ -122,10 +122,11 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
         <p>
           <h3>Azure Analysis</h3>
         </p>
+        <p>Confidence: {{pct}}&#37;</p>
         <p>Description: </p>
         <p>{{text}}</p>
         <p id="azurePtag"></p> <!-- an empty p tag with an id. The id will be selected and html added via js -->
-        <img src="" class="img-responsive margin" style="width:100%" alt="Image">
+        <!-- <img src="" class="img-responsive margin" style="width:100%" alt="Image"> -->
       </div>
     </div>
   </div>

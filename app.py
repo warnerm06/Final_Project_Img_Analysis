@@ -23,7 +23,7 @@ import urllib
 
 # Set to true if devloping on local machine. Turn to false when in production.
 # This sets envronment variables to connect to API and database
-developmentEnvironment = False
+developmentEnvironment = True
 if developmentEnvironment == True:
     from config import api_key
     from config import dbURL
@@ -175,6 +175,7 @@ def index():
     sv = None
     imgPath= "static/FashionSanta.jpg"
     text = None
+    pct = ""
 
     if request.method == 'POST':
         global globalAzureResults
@@ -196,22 +197,21 @@ def index():
             azureResults=azureAPIlocal(imgPath)
 
             globalAzureResults= azureResults
-            globalAzureResults= azureResults
             text = azureResults["description"]["captions"][0]["text"]
-
+            pct = azureResults["description"]["captions"][0]["confidence"]
         # If they user is sending a URL do this:
         else:
             urlAddress = request.values.get("urlAddress")
-            print(urlAddress)
             azureResults = azureAPI(urlAddress)
             imgPath=urlAddress
             sv=predict(imgPath, "url")
 
             globalAzureResults= azureResults
             text = azureResults["description"]["captions"][0]["text"]
-            
+            pct = azureResults["description"]["captions"][0]["confidence"]
+            pct = round(float(pct),3)*100
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
-    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath, text=text)
+    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath, text=text, pct=pct)
 
 # Use our ML model to Predict Santa or Not Santa
 def predict(fp, source): #fp is "filepath" and source is either "url" or "local".

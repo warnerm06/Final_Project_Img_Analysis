@@ -6,7 +6,7 @@ var tableData = azureResults
 var str = JSON.stringify(tableData, undefined, 4);
 
 
-document.getElementById("buttonID").onclick =output(syntaxHighlight(str)); 
+// document.getElementById("buttonID").onclick =output(syntaxHighlight(str)); 
 
 function output(inp) {
     console.log("onclick",str)
