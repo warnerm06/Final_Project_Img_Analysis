@@ -177,6 +177,8 @@ def index():
     text = None
     pct = ""
 
+    
+
     if request.method == 'POST':
         global globalAzureResults
         # If they are send a file do this:
@@ -199,8 +201,11 @@ def index():
             globalAzureResults= azureResults
             text = azureResults["description"]["captions"][0]["text"]
             pct = azureResults["description"]["captions"][0]["confidence"]
+            pct = round(float(pct),3)*100
+            
+            
         # If they user is sending a URL do this:
-        else:
+        elif request.files.get('file'):
             urlAddress = request.values.get("urlAddress")
             azureResults = azureAPI(urlAddress)
             imgPath=urlAddress
@@ -210,6 +215,15 @@ def index():
             text = azureResults["description"]["captions"][0]["text"]
             pct = azureResults["description"]["captions"][0]["confidence"]
             pct = round(float(pct),3)*100
+           
+        
+        else:
+            try:
+                request.files.get('file')
+            except requests.exceptions.RequestException as e:
+                Pass
+
+    #raise Exception("Can't connect to database")
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
     return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath, text=text, pct=pct)
 
@@ -252,6 +266,8 @@ def moreInfo():
 
 
     return render_template("index2.html",info =globalAzureResults)
+
+
 
 #used to run the app
 if __name__ == "__main__":
