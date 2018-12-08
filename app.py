@@ -177,8 +177,6 @@ def index():
     text = None
     pct = ""
 
-    
-
     if request.method == 'POST':
         global globalAzureResults
         # If they are send a file do this:
@@ -205,23 +203,28 @@ def index():
             
             
         # If they user is sending a URL do this:
-        elif request.files.get('file'):
-            urlAddress = request.values.get("urlAddress")
-            azureResults = azureAPI(urlAddress)
-            imgPath=urlAddress
-            sv=predict(imgPath, "url")
-
-            globalAzureResults= azureResults
-            text = azureResults["description"]["captions"][0]["text"]
-            pct = azureResults["description"]["captions"][0]["confidence"]
-            pct = round(float(pct),3)*100
-           
-        
         else:
             try:
-                request.files.get('file')
+                request.files.get('urlAddress')
+                urlAddress = request.values.get("urlAddress")
+                azureResults = azureAPI(urlAddress)
+                imgPath=urlAddress
+                sv=predict(imgPath, "url")
+
+                globalAzureResults= azureResults
+                text = azureResults["description"]["captions"][0]["text"]
+                pct = azureResults["description"]["captions"][0]["confidence"]
+                pct = round(float(pct),3)*100
             except requests.exceptions.RequestException as e:
-                Pass
+                pass
+
+           
+        # else:
+        #     try:
+        #         request.files.get('urlAddress')
+        #     except requests.exceptions.RequestException as e:
+        #         print(e)
+        #         pass
 
     #raise Exception("Can't connect to database")
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
@@ -263,11 +266,7 @@ def predict(fp, source): #fp is "filepath" and source is either "url" or "local"
 
 @app.route("/moreInfo")
 def moreInfo():
-
-
     return render_template("index2.html",info =globalAzureResults)
-
-
 
 #used to run the app
 if __name__ == "__main__":
