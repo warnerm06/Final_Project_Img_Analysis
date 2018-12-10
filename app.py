@@ -204,21 +204,17 @@ def index():
             
         # If they user is sending a URL do this:
         else:
-            try:
-                request.files.get('urlAddress')
-                urlAddress = request.values.get("urlAddress")
-                azureResults = azureAPI(urlAddress)
-                imgPath=urlAddress
-                sv=predict(imgPath, "url")
+            request.files.get('urlAddress')
+            urlAddress = request.values.get("urlAddress")
+            azureResults = azureAPI(urlAddress)
+            imgPath=urlAddress
+            sv=predict(imgPath, "url")
 
-                globalAzureResults= azureResults
-                text = azureResults["description"]["captions"][0]["text"]
-                pct = azureResults["description"]["captions"][0]["confidence"]
-                pct = round(float(pct),3)*100
-            except requests.exceptions.RequestException as e:
-                pass
-
-           
+            globalAzureResults= azureResults
+            text = azureResults["description"]["captions"][0]["text"]
+            pct = azureResults["description"]["captions"][0]["confidence"]
+            pct = round(float(pct),3)*100
+            
         # else:
         #     try:
         #         request.files.get('urlAddress')
