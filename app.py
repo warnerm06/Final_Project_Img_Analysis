@@ -106,7 +106,7 @@ def azureAPI(urlAddress):
 
 #Use this function for azureAPI calls form local file
 def azureAPIlocal(fp):
-    print("here1")
+    
     _region = 'westus' #Here you enter the region of your subscription
     _url = 'https://{}.api.cognitive.microsoft.com/vision/v2.0/analyze'.format(_region)
     _key = api_key
@@ -138,7 +138,7 @@ def azureAPIlocal(fp):
                 print( "Error code: %d" % ( response.status_code ) )
                 print( "Message: %s" % ( response.json() ) )
             break
-        print(result)
+        
         return result
 
     # Load raw image file into memory
@@ -169,13 +169,14 @@ def index():
             # print(dir(results[0]))
     
     #Once Upload/Submit button is clicked the user sends a "Post" request
-
     # These variables must be set to none to start with in case the if statement is not executed
     azureResults= None
     sv = None
     imgPath= "static/FashionSanta.jpg"
     text = None
     pct = ""
+    category = None
+    tags = None
 
     if request.method == 'POST':
         global globalAzureResults
@@ -200,7 +201,14 @@ def index():
             text = azureResults["description"]["captions"][0]["text"]
             pct = azureResults["description"]["captions"][0]["confidence"]
             pct = round(float(pct),3)*100
-            
+            try:
+                category= azureResults["categories"][0]["name"]
+            except:
+                pass
+            try:
+                tags= ", ".join(azureResults["description"]["tags"])
+            except:
+                pass
             
         # If they user is sending a URL do this:
         else:
@@ -214,6 +222,14 @@ def index():
             text = azureResults["description"]["captions"][0]["text"]
             pct = azureResults["description"]["captions"][0]["confidence"]
             pct = round(float(pct),3)*100
+            try:
+                category= azureResults["categories"][0]["name"]
+            except:
+                pass
+            try:
+                tags= ", ".join(azureResults["description"]["tags"])
+            except:
+                pass
             
         # else:
         #     try:
@@ -224,7 +240,13 @@ def index():
 
     #raise Exception("Can't connect to database")
     #Returns a variable "azureResults" to the HTML file. It is listed as {{azureResults}} in the HTML file
-    return render_template("index.html",azureResults=azureResults, prediction=sv, predImg=imgPath, text=text, pct=pct)
+    return render_template("index.html",azureResults=azureResults, 
+                                        prediction=sv, 
+                                        predImg=imgPath, 
+                                        text=text, 
+                                        pct=pct, 
+                                        category = category,
+                                        tags = tags)
 
 # Use our ML model to Predict Santa or Not Santa
 def predict(fp, source): #fp is "filepath" and source is either "url" or "local".
