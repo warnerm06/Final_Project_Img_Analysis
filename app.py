@@ -200,7 +200,7 @@ def index():
             globalAzureResults= azureResults
             text = azureResults["description"]["captions"][0]["text"]
             pct = azureResults["description"]["captions"][0]["confidence"]
-            pct = round(float(pct),3)*100
+            pct = "%.1f" % (float(pct)*100)
             try:
                 category= azureResults["categories"][0]["name"]
             except:
@@ -214,22 +214,25 @@ def index():
         else:
             request.files.get('urlAddress')
             urlAddress = request.values.get("urlAddress")
-            azureResults = azureAPI(urlAddress)
-            imgPath=urlAddress
-            sv=predict(imgPath, "url")
+            if urlAddress == "Upload Image or URL":
+                pass
+            else:
+                azureResults = azureAPI(urlAddress)
+                imgPath=urlAddress
+                sv=predict(imgPath, "url")
 
-            globalAzureResults= azureResults
-            text = azureResults["description"]["captions"][0]["text"]
-            pct = azureResults["description"]["captions"][0]["confidence"]
-            pct = round(float(pct),3)*100
-            try:
-                category= azureResults["categories"][0]["name"]
-            except:
-                pass
-            try:
-                tags= ", ".join(azureResults["description"]["tags"])
-            except:
-                pass
+                globalAzureResults= azureResults
+                text = azureResults["description"]["captions"][0]["text"]
+                pct = azureResults["description"]["captions"][0]["confidence"]
+                pct = "%.1f" % (float(pct)*100)
+                try:
+                    category= azureResults["categories"][0]["name"]
+                except:
+                    pass
+                try:
+                    tags= ", ".join(azureResults["description"]["tags"])
+                except:
+                    pass
             
         # else:
         #     try:
