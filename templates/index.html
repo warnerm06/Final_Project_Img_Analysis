@@ -3,14 +3,15 @@
 
 <head>
   <!-- Theme Made By www.w3schools.com - No Copyright - Modifications and Additions made by Dave Galloway -->
-  <title>It's Santa!</title>
+  <title>Santa Vision</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  
+  <link rel='icon' href='../static/santa_sunglasses.webp' type='image/x-icon'/ >
   <!-- Some inline CSS for editing convenience -->
   <style>
     body {
@@ -19,7 +20,7 @@
       color: #f5f6f7;
   }
   p {font-size: 20px;}
-  .margin {margin-bottom: 45px;}
+  .margin {margin-bottom: 25px;}
   .bg-1 { 
       background-color: #f31a37; /* Christmas red */
       color: #ffffff;
@@ -75,6 +76,15 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .boolean { color: blue; }
 .null { color: rgb(92, 43, 8); }
 .key { color: white; }
+/* customizable snowflake styling */
+.snowflake {
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial;
+  text-shadow: 0 0 1px #000;
+}
+
+@-webkit-keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@-webkit-keyframes snowflakes-shake{0%{-webkit-transform:translateX(0px);transform:translateX(0px)}50%{-webkit-transform:translateX(80px);transform:translateX(80px)}100%{-webkit-transform:translateX(0px);transform:translateX(0px)}}@keyframes snowflakes-fall{0%{top:-10%}100%{top:100%}}@keyframes snowflakes-shake{0%{transform:translateX(0px)}50%{transform:translateX(80px)}100%{transform:translateX(0px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;-webkit-animation-name:snowflakes-fall,snowflakes-shake;-webkit-animation-duration:10s,3s;-webkit-animation-timing-function:linear,ease-in-out;-webkit-animation-iteration-count:infinite,infinite;-webkit-animation-play-state:running,running;animation-name:snowflakes-fall,snowflakes-shake;animation-duration:10s,3s;animation-timing-function:linear,ease-in-out;animation-iteration-count:1,1;animation-play-state:running,running}.snowflake:nth-of-type(0){left:1%;-webkit-animation-delay:0s,0s;animation-delay:0s,0s}.snowflake:nth-of-type(1){left:10%;-webkit-animation-delay:1s,1s;animation-delay:1s,1s}.snowflake:nth-of-type(2){left:20%;-webkit-animation-delay:6s,.5s;animation-delay:6s,.5s}.snowflake:nth-of-type(3){left:30%;-webkit-animation-delay:4s,2s;animation-delay:4s,2s}.snowflake:nth-of-type(4){left:40%;-webkit-animation-delay:2s,2s;animation-delay:2s,2s}.snowflake:nth-of-type(5){left:50%;-webkit-animation-delay:8s,3s;animation-delay:8s,3s}.snowflake:nth-of-type(6){left:60%;-webkit-animation-delay:6s,2s;animation-delay:6s,2s}.snowflake:nth-of-type(7){left:70%;-webkit-animation-delay:2.5s,1s;animation-delay:2.5s,1s}.snowflake:nth-of-type(8){left:80%;-webkit-animation-delay:1s,0s;animation-delay:1s,0s}.snowflake:nth-of-type(9){left:90%;-webkit-animation-delay:3s,1.5s;animation-delay:3s,1.5s;}
 
   </style>
 </head>
@@ -103,6 +113,70 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     </div>
   </nav>
   <!-- <script type="text/javascript">var str = JSON.stringify({{azureResults}}, null, 2); // spacing level = 2 </script> -->
+  <div class="snowflakes" aria-hidden="true">
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+  </div>
+  <div class="snowflakes" aria-hidden="true">
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+    <div class="snowflake">
+    ❅
+    </div>
+    <div class="snowflake">
+    ❆
+    </div>
+    <div class="snowflake">
+    ❄
+    </div>
+  </div>
   
   <div class="container-fluid bg-2">
     <!-- <h3>Upload your pic...</h3> -->
@@ -124,7 +198,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     <div class="row">
       <div class="col-sm-3">
         <p>
-          <h3>Our Analysis</h3>
+            <h2><b><u>Our Analysis</u></b></h2>
         </p>
         <p><b>{{prediction}}</b></p> <!-- our Sant or Not Santa Prediction. This is a variable returned by our homepage -->
         <!-- <img src="" class="img-responsive margin" style="width:100%" alt="Image"> -->
@@ -136,19 +210,24 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
       </div>
       <div class="col-sm-3">
         <p>
-          <h3>Azure Analysis</h3>
+          <h2><b><u>Azure Analysis</u></b></h2>
         </p>
-        <p>Confidence: {{pct}}&#37;</p>
-        <p>Description: </p>
+        <p><b>Confidence: </b>{{pct}}&#37;</p>
+        <p><b>Description: </b></p>
         <p>{{text}}</p>
-        <p id="azurePtag"></p> <!-- an empty p tag with an id. The id will be selected and html added via js -->
+        <p><b>Category:</b></p>
+        <p>{{category}}</p>
+        <p><b>Tags:</b></p>
+        <p>{{tags}}</p>
+       
+
+      <!-- an empty p tag with an id. The id will be selected and html added via js -->
         <!-- <img src="" class="img-responsive margin" style="width:100%" alt="Image"> -->
       </div>
     </div>
   </div>
-  <input type="text" name="urlAddress" value="" style="width: 100%">
+  <!-- <input type="text" name="urlAddress" value="" style="width: 100%"> -->
   <!-- Second Container -->
-
     <!-- <form method=post enctype=multipart/form-data>
         Upload your image:<br>
         <input type="text" name="userURL" value="Am I Santa?">
@@ -204,6 +283,7 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 
 
 
+
   <!-- <pre class= "prettyprint"><code class ="language-js">{{azureResults}}</code></pre> -->
 
   <!-- Footer -->
@@ -211,8 +291,8 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     <p>Check us out on linkedin:
       <a href="https://www.linkedin.com/in/matthew-warner-14b378163/"> Matt</a>
       <a href="https://www.linkedin.com/in/davegalloway777/"> Dave</a>
-      <a href=""> Tom </a>
-      <a href="">Michael</a>
+      <a href="https://www.linkedin.com/in/tom-matoushek-5214a868/"> Tom </a>
+      <a href="https://www.linkedin.com/in/michael-wunderlich-8b967225/">Michael</a>
       <a href="https://www.linkedin.com/in/emma-li-b6668591/"> Emma</a>
     </p>
   </footer>

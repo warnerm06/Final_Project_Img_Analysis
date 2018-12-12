@@ -5,7 +5,6 @@ var tableData = azureResults
 //When our submit button is clicked call the build table function//
 var str = JSON.stringify(tableData, undefined, 4);
 
-
 // document.getElementById("buttonID").onclick =output(syntaxHighlight(str)); 
 
 function output(inp) {
@@ -14,7 +13,7 @@ function output(inp) {
     document.getElementById("azurePtag").innerHTML = inp;
 
 }
-
+// function to highlight the sytax
 function syntaxHighlight(json) {
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
