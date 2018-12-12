@@ -177,9 +177,9 @@ def index():
     pct = ""
     category = None
     tags = None
-
+    global globalAzureResults
     if request.method == 'POST':
-        global globalAzureResults
+        
         # If they are send a file do this:
         if request.files.get('file'):
             # read the file
