@@ -19,14 +19,15 @@ import requests
 # from __future__ import print_function
 # from config import api_key
 import urllib
+from pprint import pprint
 #-----------------------------------------------------------------------
 
 # Set to true if devloping on local machine. Turn to false when in production.
 # This sets envronment variables to connect to API and database
-developmentEnvironment = False
+developmentEnvironment = True
 if developmentEnvironment == True:
     from config import api_key
-    from config import dbURL
+    # from config import dbURL
 else:
     dbURL = os.environ.get('DATABASE_URL', '')
     api_key = os.environ.get('AZURE_API_KEY', '')
@@ -35,10 +36,10 @@ globalAzureResults= None
 #Database Setup
 #must have "check_same_thread=False" or program will crash
 
-engine = create_engine(dbURL)
-Base = automap_base()
-Base.prepare(engine, reflect = True)
-session = Session(engine)
+# engine = create_engine(dbURL)
+# Base = automap_base()
+# Base.prepare(engine, reflect = True)
+# session = Session(engine)
 
 #Set up Flask
 app = Flask(__name__)
@@ -48,17 +49,17 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DATABASE_URL will contain the database connection string:
-app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
+# app.config['SQLALCHEMY_DATABASE_URI'] = dbURL
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require') #from heroku
 
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 
 # Connects to the database using the app config
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 #Create variable for Table in DB
-image_info=Base.classes.image_info
+# image_info=Base.classes.image_info
 
 #function to get AzureAPI info from url. Thi is only for URL addresses. It doesnt work for local file lookups. 
 # Found from Microsoft github 
@@ -138,7 +139,7 @@ def azureAPIlocal(fp):
                 print( "Error code: %d" % ( response.status_code ) )
                 print( "Message: %s" % ( response.json() ) )
             break
-        
+        pprint(result)
         return result
 
     # Load raw image file into memory
@@ -198,9 +199,13 @@ def index():
             azureResults=azureAPIlocal(imgPath)
 
             globalAzureResults= azureResults
-            text = azureResults["description"]["captions"][0]["text"]
-            pct = azureResults["description"]["captions"][0]["confidence"]
-            pct = "%.1f" % (float(pct)*100)
+            try:
+                text = azureResults["description"]["captions"][0]["text"]
+                pct = azureResults["description"]["captions"][0]["confidence"]
+                pct = "%.1f" % (float(pct)*100)
+            except:
+                text = None
+                pct = None
             try:
                 category= azureResults["categories"][0]["name"]
             except:

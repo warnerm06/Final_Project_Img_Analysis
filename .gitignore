@@ -7,8 +7,12 @@ cifar-10-python.tar
 cifar-10-python.tar.gz
 
 config.py
+config.pyc
 __pycache__
 image-classification-keras.zip
 
 train_images
 uploads/*
+
+localConfig.py
+localConfig.ipynb
