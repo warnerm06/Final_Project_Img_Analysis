@@ -24,7 +24,7 @@ from pprint import pprint
 
 # Set to true if devloping on local machine. Turn to false when in production.
 # This sets envronment variables to connect to API and database
-developmentEnvironment = True
+developmentEnvironment = False
 if developmentEnvironment == True:
     from config import api_key
     # from config import dbURL
