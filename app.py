@@ -139,7 +139,7 @@ def azureAPIlocal(fp):
                 print( "Error code: %d" % ( response.status_code ) )
                 print( "Message: %s" % ( response.json() ) )
             break
-        pprint(result)
+        # pprint(result)
         return result
 
     # Load raw image file into memory
@@ -199,6 +199,7 @@ def index():
             azureResults=azureAPIlocal(imgPath)
 
             globalAzureResults= azureResults
+            # print(globalAzureResults)
             try:
                 text = azureResults["description"]["captions"][0]["text"]
                 pct = azureResults["description"]["captions"][0]["confidence"]
